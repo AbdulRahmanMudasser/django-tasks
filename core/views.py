@@ -77,7 +77,24 @@ def home(request):
         
         # Save Todo
         todo.save()
+        
+        # Filtering Todos By Date
+        todos = models.Todo.objects.filter(user=request.user).order_by('-date')
+        
+        context = {
+            'todos': todos,
+        } 
+        
+        # Redirect to Home Page
+        return redirect('/home', context)
+    
+    # Filtering Todos By Date
+    todos = models.Todo.objects.filter(user=request.user).order_by('-date')
+        
+    context = {
+        'todos': todos,
+    } 
     
     # Render Home Page
-    return render(request, 'home.html')
+    return render(request, 'home.html', context)
     

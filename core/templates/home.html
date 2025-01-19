@@ -28,13 +28,27 @@
                 <h1>Hello {{user}}</h1>
             </div>
 
+            <i class="fa-solid fa-arrow-right-from-bracket" style="color: #ffffff;"></i>
+
             <form action="" method="post">
                 {% csrf_token %}
 
                 <input type="text" name="title" class="inp" placeholder="Add Today's Task" required>
 
-                <input type="submit" class="submit-button" value="Add Task  ">
+                <input type="submit" class="submit-button" value="Add Task">
             </form>
+
+            {% for todo in todos %}
+                <div class="todos">
+                    <h5>{{ todo.srno }}</h5>
+                    <p>{{ todo.title }}</p>
+
+                    <div>
+                        <a href=""><i class="fa-solid fa-pen" style="color: #ffffff;"></i></a>
+                        <a href=""><i class="fa-solid fa-trash" style="color: #ffffff;"></i></a>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </body>

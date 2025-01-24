@@ -8,14 +8,14 @@
 <body>
     <h1>To-Do List</h1>
 
-    <a href="">Add New Task</a>
+    <a href="{% url 'task_create' %}">Add New Task</a>
 
     <ul>
         {% for task in tasks %}
             <li>
-                <a href="">task.title</a>
+                <a href="{% url 'task_update' task.id %}">{{ task.title }}</a> - {% if task.completed %} Completed {% else %} Pending {% endif %}
 
-                <form action="" method="post">
+                <form action="" method="post" style="display: inline;">
                     {% csrf_token %}
 
                     <button type="submit">Delete</button>

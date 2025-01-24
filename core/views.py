@@ -60,3 +60,24 @@ def task_update(request, pk):
     
     # Render Task Update Template
     return render(request, 'core/task_form.html', context)
+
+# Delete Task View
+def task_delete(request, pk):
+    # Get Task With pk
+    task = get_object_or_404(models.Task, pk=pk)
+    
+    # Check if Request Method is POST
+    if request.method == 'POST':
+        # Delete Task
+        task.delete()
+        
+        # Redirect to Task List Template
+        return redirect('task_list')
+    
+    context = {
+        'task': task,
+    }
+    
+    # Render Task Delete Template
+    return render(request, 'core/task_delete_confirmation.html', context)
+    

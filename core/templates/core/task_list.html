@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
 </head>
+
 <body>
     <h1>To-Do List</h1>
 
@@ -12,16 +14,24 @@
 
     <ul>
         {% for task in tasks %}
-            <li>
-                <a href="{% url 'task_update' task.id %}">{{ task.title }}</a> - {% if task.completed %} Completed {% else %} Pending {% endif %}
+        <li>
+            <a href="{% url 'task_update' task.id %}">{{ task.title }}</a> - {% if task.completed %} Completed {% else
+            %} Pending {% endif %}
 
-                <form action="" method="post" style="display: inline;">
-                    {% csrf_token %}
+            <form action="{% url 'task_delete' task.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
 
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
+                <!-- <button type="submit">Delete</button> -->
+
+                <button type="submit" onclick="return confirm('Are You Sure You Want to Delete?');">Delete</button>
+
+                <br>
+
+                <span style="margin-bottom: 10px;">Task Details: {{ task.description }}</span>
+            </form>
+        </li>
         {% endfor %}
     </ul>
 </body>
+
 </html>
